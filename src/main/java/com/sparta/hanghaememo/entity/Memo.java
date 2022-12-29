@@ -20,20 +20,29 @@ public class Memo extends Timestamped {
     private String contents;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
     private String password;
 
-    public Memo(MemoRequestDto requestDto) { //생성자
-        this.username = requestDto.getName();
+    @Column(nullable = false)
+    private String title;
+//
+//    public Memo(String username, String contents) {
+//        this.username = username;
+//        this.contents = contents;
+//    }
+
+    public Memo(MemoRequestDto requestDto) {
+        this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
-        this.title = requestDto.getTitle();
         this.password = requestDto.getPassword();
+        this.title = requestDto.getTitle();
     }
 
-    public void update(MemoRequestDto requestDto) { //수정은 직접 테이블에서
-        this.username = requestDto.getName();
-        this.contents = requestDto.getContents();
+    public void update(MemoRequestDto memoRequestDto) {
+        this.contents = memoRequestDto.getContents();
+        this.password = memoRequestDto.getPassword();
+        this.title = memoRequestDto.getTitle();
+        this.username = memoRequestDto.getUsername();
     }
+
+
 }

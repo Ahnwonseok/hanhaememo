@@ -1,5 +1,6 @@
 package com.sparta.hanghaememo.controller;
 
+
 import com.sparta.hanghaememo.dto.MemoRequestDto;
 import com.sparta.hanghaememo.entity.Memo;
 import com.sparta.hanghaememo.service.MemoService;
@@ -11,33 +12,33 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class Memocontroller {
+public class MemoController {
 
     private final MemoService memoService;
 
     @GetMapping("/")
     public ModelAndView home() {
-        return new ModelAndView("index"); //ModelAndView : Model객체 생성`
+        return new ModelAndView("index");
     }
 
     @PostMapping("/api/memos")
-    public Memo createdMem(@RequestBody MemoRequestDto requestDto) { //RequestBody : 객체를 반환
-                                        //createdMem의 파라미터는 클라이언트에서 가져오는 데이터를 타입을 지정
+    public Memo createMemo(@RequestBody MemoRequestDto requestDto) {
         return memoService.createMemo(requestDto);
     }
 
     @GetMapping("/api/memos")
-    public List<Memo> getMemos(){
+    public List<Memo> getMemos() {
         return memoService.getMemos();
     }
 
     @PutMapping("/api/memos/{id}")
-    public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto){
+    public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
         return memoService.update(id, requestDto);
     }
 
-    @DeleteMapping("api/memos/{id}")
-    public Long deleteMemo(@PathVariable Long id){
-        return memoService.deleteMemo(id);
+    @DeleteMapping("/api/memos/{id}")
+    public Long deleteMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
+        return memoService.deleteMemo(id, requestDto);
     }
+
 }
